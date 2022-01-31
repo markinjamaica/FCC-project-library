@@ -8,7 +8,7 @@ module.exports = () => {
     const { Schema, model } = mongoose;
 
     const bookSchema = new Schema({
-        book_title: String,
+        title: String,
         comments: [String],
     });
 
