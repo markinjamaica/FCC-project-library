@@ -4,7 +4,7 @@ module.exports = () => {
     // Connect to database
     mongoose.connect(process.env.DB);
 
-    // Define schemas
+    // Define schema
     const { Schema, model } = mongoose;
 
     const bookSchema = new Schema({
@@ -12,8 +12,7 @@ module.exports = () => {
         comments: [String],
     });
 
-    // Define models
-    // const Project = model('Project', projectSchema);
+    // Define model
     const Book = model('Book', bookSchema);
 
     return Book;
