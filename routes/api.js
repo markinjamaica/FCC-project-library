@@ -9,15 +9,37 @@
 'use strict';
 
 module.exports = async function (app, db) {
+    // connect to database and get book model
+    const Book = db();
+
     app.route('/api/books')
         .get(function (req, res) {
+            Book.find()
+                .then((books) => res.send(books))
+                .catch((error) => console.log(error));
             //response will be array of book objects
             //json res format: [{"_id": bookid, "title": book_title, "commentcount": num_of_comments },...]
         })
 
         .post(function (req, res) {
             let title = req.body.title;
-            //response will contain new book object including atleast _id and title
+
+            if (!title) {
+                res.send('missing required field title');
+            }
+
+            const book = new Book({
+                title: title,
+            });
+
+            book.save()
+                .then((savedBook) => {
+                    res.json({
+                        title: savedBook.title,
+                        _id: savedBook._id,
+                    });
+                })
+                .catch((error) => res.send(error));
         })
 
         .delete(function (req, res) {
