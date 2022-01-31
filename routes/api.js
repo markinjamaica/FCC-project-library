@@ -60,6 +60,15 @@ module.exports = async function (app, db) {
 
         .delete(function (req, res) {
             let bookid = req.params.id;
-            //if successful response will be 'delete successful'
+
+            Book.findById(bookid)
+                .deleteOne()
+                .then((object) => {
+                    if (object.deletedCount !== 1) {
+                        throw new Error('no book exists');
+                    }
+                    res.send('delete successful');
+                })
+                .catch((error) => res.send(error));
         });
 };
