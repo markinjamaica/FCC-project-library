@@ -8,14 +8,7 @@
 
 'use strict';
 
-module.exports = async function (app, mongoose) {
-    // connect to database
-    try {
-        await mongoose.connect(process.env.DB);
-    } catch (error) {
-        console.log(error);
-    }
-
+module.exports = async function (app, db) {
     app.route('/api/books')
         .get(function (req, res) {
             //response will be array of book objects

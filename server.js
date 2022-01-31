@@ -8,7 +8,7 @@ require('dotenv').config();
 const apiRoutes = require('./routes/api.js');
 const fccTestingRoutes = require('./routes/fcctesting.js');
 const runner = require('./test-runner');
-const mongoose = require('mongoose');
+const db = require('./mongoose-db');
 
 const app = express();
 
@@ -28,7 +28,7 @@ app.route('/').get(function (req, res) {
 fccTestingRoutes(app);
 
 //Routing for API
-apiRoutes(app, mongoose);
+apiRoutes(app, db);
 
 //404 Not Found Middleware
 app.use(function (req, res, next) {
