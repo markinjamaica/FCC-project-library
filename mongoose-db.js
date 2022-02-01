@@ -10,7 +10,10 @@ module.exports = () => {
     const bookSchema = new Schema({
         title: String,
         comments: [String],
-        commentcount: Number,
+        commentcount: {
+            type: Number,
+            default: 0,
+        },
     });
 
     // Define model
