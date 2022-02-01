@@ -61,6 +61,16 @@ module.exports = async function (app, db) {
         .post(function (req, res) {
             let bookid = req.params.id;
             let comment = req.body.comment;
+            if (!comment) {
+                return res.send('missing required field comment');
+            }
+
+            Book.findById(bookid)
+                .then((book) => {
+                    book.comments.push(comment);
+                    book.save().then((book) => res.send(book));
+                })
+                .catch((error) => res.send('no book exists'));
             //json res format same as .get
         })
 
