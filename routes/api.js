@@ -15,6 +15,7 @@ module.exports = async function (app, db) {
     app.route('/api/books')
         .get(function (req, res) {
             Book.find()
+                .select('title _id commentcount')
                 .then((books) => res.send(books))
                 .catch((error) => console.log(error));
             //response will be array of book objects
@@ -49,6 +50,10 @@ module.exports = async function (app, db) {
     app.route('/api/books/:id')
         .get(function (req, res) {
             let bookid = req.params.id;
+
+            Book.findById(bookid)
+                .then((books) => res.send(books))
+                .catch((error) => console.log(error));
             //json res format: {"_id": bookid, "title": book_title, "comments": [comment,comment,...]}
         })
 
