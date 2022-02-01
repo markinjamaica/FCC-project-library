@@ -26,7 +26,7 @@ module.exports = async function (app, db) {
             let title = req.body.title;
 
             if (!title) {
-                res.send('missing required field title');
+                return res.send('missing required field title');
             }
 
             const book = new Book({
