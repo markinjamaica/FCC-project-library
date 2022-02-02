@@ -8,6 +8,9 @@
 
 'use strict';
 
+// TODO: sample front end showing 0 comments, and is not deleting single book
+// Error message saying 'Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "Book"
+
 module.exports = async function (app, db) {
     // connect to database and get book model
     const Book = db();
@@ -44,6 +47,9 @@ module.exports = async function (app, db) {
         })
 
         .delete(function (req, res) {
+            Book.deleteMany()
+                .then(() => res.send('complete delete successful'))
+                .catch((error) => console.log(error));
             //if successful response will be 'complete delete successful'
         });
 
