@@ -57,7 +57,7 @@ module.exports = async function (app, db) {
         .get(function (req, res) {
             let bookid = req.params.id;
 
-            Book.find({ _id: bookid })
+            Book.findById(bookid)
                 .select('title _id comments')
                 .then((book) => res.send(book))
                 .catch((error) => res.send('no book exists'));
