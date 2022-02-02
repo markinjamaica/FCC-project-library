@@ -74,7 +74,14 @@ module.exports = async function (app, db) {
             Book.findById(bookid)
                 .then((book) => {
                     book.comments.push(comment);
-                    book.save().then((book) => res.send(book));
+                    book.commentcount = book.comments.length;
+                    book.save().then((book) =>
+                        res.json({
+                            title: book.title,
+                            _id: book._id,
+                            comments: book.comments,
+                        })
+                    );
                 })
                 .catch((error) => res.send('no book exists'));
             //json res format same as .get
