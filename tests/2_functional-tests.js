@@ -214,7 +214,14 @@ suite('Functional Tests', function () {
                 });
 
                 test('Test POST /api/books/[id] with comment, id not in db', function (done) {
-                    //done();
+                    chai.request(server)
+                        .post('/api/books/fakeId')
+                        .send({ comment: 'this comment will never be seen' })
+                        .end((err, res) => {
+                            assert.equal(res.status, 200);
+                            assert.equal(res.text, 'no book exists');
+                            done();
+                        });
                 });
             }
         );
