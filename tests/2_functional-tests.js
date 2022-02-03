@@ -168,7 +168,36 @@ suite('Functional Tests', function () {
             'POST /api/books/[id] => add comment/expect book object with id',
             function () {
                 test('Test POST /api/books/[id] with comment', function (done) {
-                    //done();
+                    chai.request(server)
+                        .post(`/api/books/${testId}`)
+                        .send({ comment: 'It could have been better' })
+                        .end((err, res) => {
+                            assert.equal(res.status, 200);
+                            assert.isObject(
+                                res.body,
+                                'response should be an object'
+                            );
+                            assert.property(
+                                res.body,
+                                'title',
+                                'Book object should have title property'
+                            );
+                            assert.property(
+                                res.body,
+                                '_id',
+                                'Book object should have _id property'
+                            );
+                            assert.property(
+                                res.body,
+                                'comments',
+                                'Book object should have comments property'
+                            );
+                            assert.isArray(
+                                res.body.comments,
+                                'Comments property should be an array'
+                            );
+                            done();
+                        });
                 });
 
                 test('Test POST /api/books/[id] without comment field', function (done) {
