@@ -132,7 +132,35 @@ suite('Functional Tests', function () {
             });
 
             test('Test GET /api/books/[id] with valid id in db', function (done) {
-                //done();
+                chai.request(server)
+                    .get(`/api/books/${testId}`)
+                    .end((err, res) => {
+                        assert.equal(res.status, 200);
+                        assert.isObject(
+                            res.body,
+                            'response should be an object'
+                        );
+                        assert.property(
+                            res.body,
+                            'title',
+                            'Book object should have title property'
+                        );
+                        assert.property(
+                            res.body,
+                            '_id',
+                            'Book object should have _id property'
+                        );
+                        assert.property(
+                            res.body,
+                            'comments',
+                            'Book object should have comments property'
+                        );
+                        assert.isArray(
+                            res.body.comments,
+                            'Comments property should be an array'
+                        );
+                        done();
+                    });
             });
         });
 
