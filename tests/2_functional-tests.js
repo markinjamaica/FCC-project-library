@@ -201,7 +201,16 @@ suite('Functional Tests', function () {
                 });
 
                 test('Test POST /api/books/[id] without comment field', function (done) {
-                    //done();
+                    chai.request(server)
+                        .post(`/api/books/${testId}`)
+                        .end((err, res) => {
+                            assert.equal(res.status, 200);
+                            assert.equal(
+                                res.text,
+                                'missing required field comment'
+                            );
+                            done();
+                        });
                 });
 
                 test('Test POST /api/books/[id] with comment, id not in db', function (done) {
