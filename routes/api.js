@@ -90,6 +90,6 @@ module.exports = async function (app, db) {
                     }
                     res.send('delete successful');
                 })
-                .catch((error) => res.send(error));
+                .catch((error) => res.send('no book exists'));
         });
 };
