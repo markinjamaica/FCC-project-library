@@ -57,6 +57,8 @@ suite('Functional Tests', function () {
                         .post('/api/books')
                         .send({ title: 'Bambi' })
                         .end((err, res) => {
+                            // Save _id for further tests
+                            testId = res.body._id;
                             assert.equal(res.status, 200);
                             assert.isObject(
                                 res.body,
