@@ -13,6 +13,8 @@ const server = require('../server');
 
 chai.use(chaiHttp);
 
+let testId;
+
 suite('Functional Tests', function () {
     /*
      * ----[EXAMPLE TEST]----
