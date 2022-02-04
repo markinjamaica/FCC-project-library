@@ -16,7 +16,7 @@ module.exports = async function (app, db) {
         .get(function (req, res) {
             Book.find()
                 .select('title _id commentcount')
-                .then((books) => res.send(books))
+                .then((books) => res.json(books))
                 .catch((error) => console.log(error));
         })
 
@@ -53,7 +53,7 @@ module.exports = async function (app, db) {
 
             Book.findById(bookid)
                 .select('title _id comments')
-                .then((book) => res.send(book))
+                .then((book) => res.json(book))
                 .catch((error) => res.send('no book exists'));
         })
 
