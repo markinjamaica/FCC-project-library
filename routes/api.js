@@ -53,7 +53,12 @@ module.exports = async function (app, db) {
 
             Book.findById(bookid)
                 .select('title _id comments')
-                .then((book) => res.json(book))
+                .then((book) => {
+                    if (!book) {
+                        throw new Error();
+                    }
+                    res.json(book);
+                })
                 .catch((error) => res.send('no book exists'));
         })
 
