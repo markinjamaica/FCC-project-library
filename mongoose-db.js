@@ -11,7 +11,7 @@ module.exports = () => {
         title: String,
         comments: [String],
         commentcount: {
-            type: String,
+            type: Number,
             default: 0,
         },
     });
